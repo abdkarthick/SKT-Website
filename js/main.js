@@ -218,7 +218,7 @@ if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
     var x = 0, y = 0, tx = 0, ty = 0;
     window.addEventListener('pointermove', function (e) {
       tx = e.clientX; ty = e.clientY; document.body.classList.add('cur-on'); d.style.transform = 'translate(' + tx + 'px,' + ty + 'px)';
-      r.classList.toggle('big', !!e.target.closest && !!e.target.closest('a,button,[data-zoom],.pt2,.th,.mlist button,.filt button'));
+      r.classList.toggle('big', !!e.target.closest && !!e.target.closest('a,button,[data-zoom],.pt2,.th,.mlist button,.filt button,.bt,.pz-c,.cb1,.cb2'));
     }, { passive: true });
     document.addEventListener('mouseleave', function () { document.body.classList.remove('cur-on'); });
     (function loop() { x += (tx - x) * .18; y += (ty - y) * .18; r.style.transform = 'translate(' + x + 'px,' + y + 'px)'; requestAnimationFrame(loop); })();
