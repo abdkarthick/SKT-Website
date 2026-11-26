@@ -183,13 +183,64 @@
       nav.addEventListener('mouseleave', function () { place(act); });
     }
 
-    function setMenu(o) {
+    /* ---------- slime wave menu transition ---------- */
+    var slime = (function () {
+      var cv = document.createElement('canvas'); cv.id = 'sl'; cv.setAttribute('aria-hidden', 'true'); document.body.appendChild(cv);
+      var ctx = cv.getContext('2d'), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      var COLS = ['#a98bf0', '#6f38db', '#2a2063'], COVER = 0.75, TOTAL = 1.9, busy = false;
+      function size() { W = innerWidth; H = innerHeight; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+      function cl(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+      function eio(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+      function edge(x, base, amp, ph, k) {
+        var a = Math.sin(x * 0.011 * k + ph), b = Math.sin(x * 0.027 * k - ph * 1.4);
+        var drip = Math.pow(0.5 + 0.5 * a, 2.2);
+        return base + amp * (drip * 1.0 + 0.35 * b);
+      }
+      function draw(t) {
+        ctx.clearRect(0, 0, W, H);
+        var amp = Math.max(70, H * 0.16), STEP = 8;
+        for (var i = 0; i < 3; i++) {
+          var cs = i * 0.1, ls = 0.9 + (2 - i) * 0.1;
+          var c = eio(cl((t - cs) / COVER)), l = eio(cl((t - ls) / COVER));
+          if (c <= 0 || l >= 1) continue;
+          var span = H + amp * 2.2, ph = t * 3 + i * 1.7, k = 1 + i * 0.35;
+          var yb = c * span - amp * 1.2, yt = l * span - amp * 1.2;
+          ctx.beginPath();
+          var x;
+          if (l <= 0) ctx.moveTo(-10, -10); else { ctx.moveTo(-10, edge(-10, yt, amp * 0.7, ph + 2, k)); for (x = -10; x <= W + 10; x += STEP) ctx.lineTo(x, edge(x, yt, amp * 0.7, ph + 2, k)); }
+          if (l <= 0) ctx.lineTo(W + 10, -10);
+          ctx.lineTo(W + 10, edge(W + 10, yb, amp, ph, k));
+          for (x = W + 10; x >= -10; x -= STEP) ctx.lineTo(x, edge(x, yb, amp, ph, k));
+          ctx.closePath(); ctx.fillStyle = COLS[i]; ctx.fill();
+        }
+      }
+      function run(mid, done) {
+        if (busy) return false; busy = true; size(); cv.classList.add('go');
+        var t0 = null, fired = false;
+        (function f(ts) {
+          if (t0 === null) t0 = ts; var t = (ts - t0) / 1000;
+          if (!fired && t >= 0.9) { fired = true; mid(); }
+          if (t >= TOTAL) { ctx.clearRect(0, 0, W, H); cv.classList.remove('go'); busy = false; if (done) done(); return; }
+          draw(t); requestAnimationFrame(f);
+        })(performance.now());
+        return true;
+      }
+      return { run: run, busy: function () { return busy; } };
+    })();
+
+    function apply(o) {
       h.classList.toggle('open', o); if (mm) mm.classList.toggle('on', o);
       if (bg) bg.setAttribute('aria-expanded', o ? 'true' : 'false');
       root.classList.toggle('ld-lock', o);
     }
+    function setMenu(o, instant) {
+      if (slime.busy() || o === h.classList.contains('open')) return;
+      var calm = instant || (window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches);
+      if (calm) { apply(o); return; }
+      slime.run(function () { apply(o); });
+    }
     if (bg) bg.addEventListener('click', function () { setMenu(!h.classList.contains('open')); });
-    if (mm) [].forEach.call(mm.querySelectorAll('a'), function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    if (mm) [].forEach.call(mm.querySelectorAll('a'), function (a) { a.addEventListener('click', function () { setMenu(false, true); }); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
   })();
 
