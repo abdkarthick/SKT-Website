@@ -18,17 +18,17 @@
 
   /* ---------- lights ---------- */
   scene.add(new T.AmbientLight(0xffffff, 0.42));
-  scene.add(new T.HemisphereLight(0xcfe0ff, 0x10201c, 0.65));
+  scene.add(new T.HemisphereLight(0xd9d0ff, 0x1b1536, 0.7));
   var key = new T.DirectionalLight(0xffffff, 1.25); key.position.set(4, 7, 6); scene.add(key);
   var rimL = new T.PointLight(0x9b72ff, 1.1, 26); rimL.position.set(-6, 2, 4); scene.add(rimL);
-  var rimP = new T.PointLight(0xffc247, 0.55, 26); rimP.position.set(8, -2, -6); scene.add(rimP);
+  var rimP = new T.PointLight(0xffb62e, 0.55, 26); rimP.position.set(8, -2, -6); scene.add(rimP);
 
   /* ---------- materials ---------- */
   function std(c, m, r, extra) { var o = { color: c, metalness: m, roughness: r, transparent: true }; for (var k in extra) o[k] = extra[k]; return new T.MeshStandardMaterial(o); }
   var mSteel = std(0x7d8aa3, 0.55, 0.4), mDark = std(0x4a566c, 0.6, 0.45), mPin = std(0xe3e9f4, 0.8, 0.25);
   var mLime = std(0x9b72ff, 0.25, 0.4, { emissive: 0x4a1fb8, emissiveIntensity: 0.45 });
-  var mPart = std(0xa8e62a, 0.15, 0.4, { emissive: 0x4f8f00, emissiveIntensity: 0.3 });
-  var mPocket = std(0x04080a, 0.3, 0.8);
+  var mPart = std(0xffb62e, 0.15, 0.4, { emissive: 0x9a5a00, emissiveIntensity: 0.3 });
+  var mPocket = std(0x0c0a1c, 0.3, 0.8);
   var mats = [mSteel, mDark, mPin, mLime, mPart, mPocket];
   var edgeMat = new T.LineBasicMaterial({ color: 0x9b72ff, transparent: true, opacity: 0.9 });
 
@@ -103,6 +103,7 @@
   function resize() {
     W = host.clientWidth || 600; H = renderer.domElement.clientHeight || 480;
     renderer.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix();
+    labels.forEach(function (l, i) { l.el.style.display = (W < 560 && (i === 0 || i === 2 || i === 5)) ? 'none' : ''; });
   }
 
   function scrollP() {
