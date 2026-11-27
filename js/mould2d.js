@@ -6,7 +6,7 @@
   if (!sec || !host) return;
 
   function lab(px, py, tx, ty, anchor, txt) {
-    return '<g class="L1"><circle cx="' + px + '" cy="' + py + '" r="4" fill="#9b72ff"/><path class="ls" d="M' + px + ' ' + py + ' L' + tx + ' ' + (ty + 4) + '"/>' +
+    return '<g class="L1"><circle cx="' + px + '" cy="' + py + '" r="4" fill="#9cced5"/><path class="ls" d="M' + px + ' ' + py + ' L' + tx + ' ' + (ty + 4) + '"/>' +
       '<text class="lab" x="' + tx + '" y="' + ty + '" text-anchor="' + anchor + '">' + txt + '</text></g>';
   }
 
@@ -23,8 +23,8 @@
     '<defs>' +
     '<linearGradient id="gA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#46526a"/><stop offset="1" stop-color="#1a2030"/></linearGradient>' +
     '<linearGradient id="gB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5f6b84"/><stop offset="1" stop-color="#232b3b"/></linearGradient>' +
-    '<linearGradient id="gP" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9b72ff"/><stop offset=".6" stop-color="#7d4fe6"/><stop offset="1" stop-color="#cdb8ff"/></linearGradient>' +
-    '<linearGradient id="gS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff7ab8"/><stop offset="1" stop-color="#9b72ff"/></linearGradient>' +
+    '<linearGradient id="gP" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9cced5"/><stop offset=".6" stop-color="#7cb1b9"/><stop offset="1" stop-color="#cde6ea"/></linearGradient>' +
+    '<linearGradient id="gS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a1d0d8"/><stop offset="1" stop-color="#9cced5"/></linearGradient>' +
     '<linearGradient id="gHi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient><radialGradient id="gSh"><stop offset="0" stop-color="#000" stop-opacity=".65"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>' +
     '</defs>' +
     '<ellipse cx="390" cy="430" rx="380" ry="34" fill="url(#gSh)"/>' +
@@ -35,9 +35,9 @@
     '<path d="M250 130 H310 V320 H250 Z" fill="#05070b" opacity=".75"/>' +
     '<path d="M60 218 L250 224 V236 L60 242 Z" fill="#05070b" opacity=".75"/>' +
     '<path id="sprue" d="M60 218 L250 224 V236 L60 242 Z" fill="url(#gS)" style="opacity:var(--fill,0)"/>' +
-    '<circle cx="110" cy="105" r="8" fill="none" stroke="#ffc247" stroke-width="3"/><circle cx="110" cy="345" r="8" fill="none" stroke="#ffc247" stroke-width="3"/>' +
-    '<circle cx="190" cy="105" r="8" fill="none" stroke="#ffc247" stroke-width="3"/><circle cx="190" cy="345" r="8" fill="none" stroke="#ffc247" stroke-width="3"/>' +
-    '<rect x="36" y="212" width="28" height="36" rx="6" fill="#9b72ff"/>' +
+    '<circle cx="110" cy="105" r="8" fill="none" stroke="#ff7247" stroke-width="3"/><circle cx="110" cy="345" r="8" fill="none" stroke="#ff7247" stroke-width="3"/>' +
+    '<circle cx="190" cy="105" r="8" fill="none" stroke="#ff7247" stroke-width="3"/><circle cx="190" cy="345" r="8" fill="none" stroke="#ff7247" stroke-width="3"/>' +
+    '<rect x="36" y="212" width="28" height="36" rx="6" fill="#9cced5"/>' +
     '</g>' +
 
     /* moving half (core side) */
@@ -45,11 +45,11 @@
     box(310, 60, 310, 330, 50, 38, 'url(#gB)', '#9aa7c2', '#2a3347') +
     '<rect x="470" y="105" width="130" height="240" rx="8" fill="#05070b" opacity=".7"/>' +
     '<rect x="264" y="144" width="48" height="162" rx="4" fill="#7c879e" stroke="#ffffff44" stroke-width="2"/>' +
-    '<circle cx="372" cy="105" r="8" fill="none" stroke="#ffc247" stroke-width="3"/><circle cx="372" cy="345" r="8" fill="none" stroke="#ffc247" stroke-width="3"/>' +
-    '<circle cx="440" cy="105" r="8" fill="none" stroke="#ffc247" stroke-width="3"/><circle cx="440" cy="345" r="8" fill="none" stroke="#ffc247" stroke-width="3"/>' +
+    '<circle cx="372" cy="105" r="8" fill="none" stroke="#ff7247" stroke-width="3"/><circle cx="372" cy="345" r="8" fill="none" stroke="#ff7247" stroke-width="3"/>' +
+    '<circle cx="440" cy="105" r="8" fill="none" stroke="#ff7247" stroke-width="3"/><circle cx="440" cy="345" r="8" fill="none" stroke="#ff7247" stroke-width="3"/>' +
     '<g id="mej">' +
-    '<rect x="548" y="125" width="30" height="200" rx="5" fill="#9b72ff"/>' +
-    '<rect x="266" y="173" width="284" height="7" rx="3" fill="#ff7ab8"/><rect x="266" y="270" width="284" height="7" rx="3" fill="#ff7ab8"/>' +
+    '<rect x="548" y="125" width="30" height="200" rx="5" fill="#9cced5"/>' +
+    '<rect x="266" y="173" width="284" height="7" rx="3" fill="#a1d0d8"/><rect x="266" y="270" width="284" height="7" rx="3" fill="#a1d0d8"/>' +
     '</g>' +
     '</g>' +
 
