@@ -48,15 +48,15 @@
     function size() { W = cv.clientWidth || 320; cv.width = cv.height = Math.round(W * dpr); }
     size(); window.addEventListener('resize', size);
 
-    /* SKT purple range: indigo, brand violet, lilac, orchid */
-    var STOPS = [[0, [74, 47, 196]], [.25, [111, 56, 219]], [.5, [169, 139, 240]], [.75, [196, 120, 236]], [1, [74, 47, 196]]];
+    /* SKT ember + steel range */
+    var STOPS = [[0, [255, 106, 51]], [.25, [255, 160, 110]], [.5, [127, 195, 207]], [.75, [255, 190, 150]], [1, [255, 106, 51]]];
     function pal(u) {
       u = ((u % 1) + 1) % 1;
       for (var i = 1; i < STOPS.length; i++) if (u <= STOPS[i][0]) {
         var a = STOPS[i - 1], b = STOPS[i], k = (u - a[0]) / (b[0] - a[0]);
         return 'rgb(' + Math.round(a[1][0] + (b[1][0] - a[1][0]) * k) + ',' + Math.round(a[1][1] + (b[1][1] - a[1][1]) * k) + ',' + Math.round(a[1][2] + (b[1][2] - a[1][2]) * k) + ')';
       }
-      return '#6f38db';
+      return '#47bbcc';
     }
     var D = Math.PI / 180;
     function cl(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
@@ -78,9 +78,9 @@
     function ball(x, y, r, a) {
       if (r <= 0.0005) return;
       ctx.save(); ctx.globalAlpha = a == null ? 1 : a;
-      ctx.shadowColor = 'rgba(111,56,219,.45)'; ctx.shadowBlur = r * 1.6;
+      ctx.shadowColor = 'rgba(71,187,204,.45)'; ctx.shadowBlur = r * 1.6;
       var g = ctx.createRadialGradient(x - r * .35, y - r * .4, r * .1, x, y, r);
-      g.addColorStop(0, '#9b78ff'); g.addColorStop(1, '#3b1fa8');
+      g.addColorStop(0, '#84e4f3'); g.addColorStop(1, '#2b8d9c');
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); ctx.restore();
     }
     function dot(x, y, r, ci) {
@@ -187,7 +187,7 @@
     var slime = (function () {
       var cv = document.createElement('canvas'); cv.id = 'sl'; cv.setAttribute('aria-hidden', 'true'); document.body.appendChild(cv);
       var ctx = cv.getContext('2d'), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      var COLS = ['#a98bf0', '#6f38db', '#2a2063'], COVER = 0.75, TOTAL = 1.9, busy = false;
+      var COLS = ['#94dce7', '#47bbcc', '#26565d'], COVER = 0.75, TOTAL = 1.9, busy = false;
       function size() { W = innerWidth; H = innerHeight; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
       function cl(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
       function eio(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }

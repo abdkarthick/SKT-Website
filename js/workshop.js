@@ -17,7 +17,7 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
   renderer.setClearColor(0x000000, 0);
 
-  var RB = [0xe5484d, 0xf5a623, 0x6cc644, 0x1fb6e8, 0x3b4fe0, 0x9b3fe0];
+  var RB = [0xe5484d, 0xf55423, 0x6cc644, 0x519db6, 0x6ca6af, 0x6ea8b1];
 
   /* ---------- helpers ---------- */
   function ss(x) { x = x < 0 ? 0 : x > 1 ? 1 : x; return x * x * (3 - 2 * x); }
@@ -59,22 +59,22 @@
   var scene = new T.Scene();
   var cam = new T.OrthographicCamera(-9, 9, 7, -7, 0.1, 120);
   var TARGET = new T.Vector3(0, 2.3, 0);
-  scene.add(new T.HemisphereLight(0xe3e8ff, 0x2a1a63, 0.95));
+  scene.add(new T.HemisphereLight(0xecf5f6, 0x30494d, 0.95));
   var dl = new T.DirectionalLight(0xffffff, 1.15); dl.position.set(6, 12, 7); scene.add(dl);
-  var pl1 = new T.PointLight(0xa98bf0, 1.3, 40); pl1.position.set(-9, 5, 6); scene.add(pl1);
-  var pl2 = new T.PointLight(0xffd9a0, 0.7, 40); pl2.position.set(9, 4, -4); scene.add(pl2);
+  var pl1 = new T.PointLight(0xa9cdd2, 1.3, 40); pl1.position.set(-9, 5, 6); scene.add(pl1);
+  var pl2 = new T.PointLight(0xffb6a0, 0.7, 40); pl2.position.set(9, 4, -4); scene.add(pl2);
   var root = new T.Group(); scene.add(root);
 
   /* ---------- shared materials ---------- */
-  var steel = M(0xcfd5f2, { metalness: 0.8, roughness: 0.3 });
-  var dark = M(0x1b1540, { metalness: 0.5, roughness: 0.5 });
-  var floorMat = M(0x1e1654, { metalness: 0.2, roughness: 0.7 });
+  var steel = M(0xd9e6e8, { metalness: 0.8, roughness: 0.3 });
+  var dark = M(0x19373c, { metalness: 0.5, roughness: 0.5 });
+  var floorMat = M(0x283e42, { metalness: 0.2, roughness: 0.7 });
 
   /* ---------- floor ---------- */
   var FX = 6.6, FZ = 4.3;
   var floor = B(root, FX * 2 + 0.6, 0.3, FZ * 2 + 0.6, floorMat, 0, -0.15, 0);
-  edge(floor, 0xa98bf0, 0.6);
-  var yel = M(0xffb62e, { metalness: 0.1, roughness: 0.6 });
+  edge(floor, 0xa9cdd2, 0.6);
+  var yel = M(0xff5f2e, { metalness: 0.1, roughness: 0.6 });
   B(root, FX * 2 - 0.6, 0.02, 0.07, yel, 0, 0.01, FZ - 0.5);
   B(root, FX * 2 - 0.6, 0.02, 0.07, yel, 0, 0.01, -FZ + 0.5);
   B(root, 0.07, 0.02, FZ * 2 - 1.0, yel, FX - 0.3, 0.01, 0);
@@ -103,10 +103,10 @@
     var hd = new T.Group(); hd.position.set(0, headY, hz); g.add(hd);
     B(hd, w * 0.4, 0.8, 0.9, body, 0, 0, 0);
     C(hd, 0.14, 0.14, 0.45, steel, 0, -0.6, 0.2);
-    var tool = C(hd, 0.05, 0.03, 0.3, glow(0xffb34c, 0.2), 0, -0.95, 0.2, 12);
+    var tool = C(hd, 0.05, 0.03, 0.3, glow(0xff764c, 0.2), 0, -0.95, 0.2, 12);
     B(g, 0.7, 0.5, 0.12, dark, w / 2 - 0.15, 1.5, d / 2 - 0.1).rotation.y = -0.35;
-    var scr = B(g, 0.55, 0.34, 0.02, glow(0xcdbcff, 0.8), w / 2 - 0.17, 1.5, d / 2 - 0.03); scr.rotation.y = -0.35;
-    var tw = C(g, 0.07, 0.07, 0.25, glow(0xffb62e, 0.9), -w / 4, colH + 0.15, -d / 2 + 0.45, 12);
+    var scr = B(g, 0.55, 0.34, 0.02, glow(0xd0e8eb, 0.8), w / 2 - 0.17, 1.5, d / 2 - 0.03); scr.rotation.y = -0.35;
+    var tw = C(g, 0.07, 0.07, 0.25, glow(0xff5f2e, 0.9), -w / 4, colH + 0.15, -d / 2 + 0.45, 12);
     var restY = 0.85 + BH / 2;
     return {
       g: g, tbl: tbl, restY: restY, body: body, w: w, d: d,
@@ -115,7 +115,7 @@
         tbl.position.x = Math.sin(t * 1.4) * 0.38 * a;
         tbl.position.z = sp + Math.cos(t * 0.9) * 0.1 * a;
         tool.material.emissiveIntensity = 0.2 + a * (0.7 + 0.3 * Math.sin(t * 40));
-        tw.material.emissive.setHex(a > 0.5 ? 0x6cc644 : 0xffb62e); tw.material.color.setHex(a > 0.5 ? 0x6cc644 : 0xffb62e);
+        tw.material.emissive.setHex(a > 0.5 ? 0x6cc644 : 0xff5f2e); tw.material.color.setHex(a > 0.5 ? 0x6cc644 : 0xff5f2e);
       }
     };
   }
@@ -125,12 +125,12 @@
     var g = new T.Group(), body = M(color, { metalness: 0.3, roughness: 0.45 });
     footprint(g, 3.0, 2.0);
     B(g, 2.4, 0.95, 1.8, body, 0, 0.475, 0);
-    var wm = M(0xd7dcf6, { metalness: 0.5, roughness: 0.35 });
+    var wm = M(0xdeedef, { metalness: 0.5, roughness: 0.35 });
     B(g, 1.7, 0.5, 0.08, wm, 0.15, 1.2, 0.76);
     B(g, 1.7, 0.5, 0.08, wm, 0.15, 1.2, -0.76);
     B(g, 0.08, 0.5, 1.6, wm, -0.7, 1.2, 0);
     B(g, 0.08, 0.5, 1.6, wm, 1.0, 1.2, 0);
-    var oil = new T.Mesh(new T.PlaneGeometry(1.6, 1.46), new T.MeshStandardMaterial({ color: 0xd98a2a, emissive: 0xff8a1a, emissiveIntensity: 0.05, transparent: true, opacity: 0.55, side: T.DoubleSide }));
+    var oil = new T.Mesh(new T.PlaneGeometry(1.6, 1.46), new T.MeshStandardMaterial({ color: 0xd9532a, emissive: 0xff4f1a, emissiveIntensity: 0.05, transparent: true, opacity: 0.55, side: T.DoubleSide }));
     oil.rotation.x = -Math.PI / 2; oil.position.set(0.15, 1.36, 0); g.add(oil);
     var tbl = new T.Group(); tbl.position.set(0.15, 0.95, 0); g.add(tbl);
     B(tbl, 1.1, 0.3, 0.85, dark, 0, 0.15, 0);
@@ -139,11 +139,11 @@
     var ramY = 2.7, rm = new T.Group(); rm.position.set(0.15, ramY, 0); g.add(rm);
     B(rm, 0.5, 0.6, 0.5, steel, 0, 0, 0);
     C(rm, 0.07, 0.07, 0.6, steel, 0, 0.5, 0, 12);
-    var el = B(rm, 0.28, 0.5, 0.28, M(0xc0763a, { metalness: 0.9, roughness: 0.3 }), 0, -0.55, 0);
-    var spark = new T.Mesh(new T.SphereGeometry(0.1, 12, 10), new T.MeshBasicMaterial({ color: 0xffd58a, transparent: true, opacity: 0 }));
+    var el = B(rm, 0.28, 0.5, 0.28, M(0xc0593a, { metalness: 0.9, roughness: 0.3 }), 0, -0.55, 0);
+    var spark = new T.Mesh(new T.SphereGeometry(0.1, 12, 10), new T.MeshBasicMaterial({ color: 0xffa58a, transparent: true, opacity: 0 }));
     spark.position.set(0, -0.82, 0); rm.add(spark);
     B(g, 0.75, 2.1, 0.95, dark, 1.75, 1.05, 0.3);
-    B(g, 0.52, 0.4, 0.04, glow(0xcdbcff, 0.8), 1.75, 1.6, 0.79);
+    B(g, 0.52, 0.4, 0.04, glow(0xd0e8eb, 0.8), 1.75, 1.6, 0.79);
     var restY = 1.25 + BH / 2 + 0.0;
     return {
       g: g, tbl: tbl, restY: restY, body: body, w: 3.0, d: 2.0,
@@ -166,16 +166,16 @@
     B(tbl, 1.4, 0.1, 0.7, steel, 0, 0.25, 0);
     B(g, 0.7, 2.4, 0.8, body, 0, 1.2, -0.65);
     B(g, 0.9, 0.7, 0.95, body, 0, 2.0, -0.15);
-    var wheel = new T.Mesh(new T.CylinderGeometry(0.5, 0.5, 0.14, 40), M(0xe8c9a0, { metalness: 0.1, roughness: 0.9 }));
+    var wheel = new T.Mesh(new T.CylinderGeometry(0.5, 0.5, 0.14, 40), M(0xe8b1a0, { metalness: 0.1, roughness: 0.9 }));
     wheel.geometry.rotateX(Math.PI / 2); wheel.position.set(0, 2.0, 0.42); g.add(wheel);
     var hub = C(g, 0.12, 0.12, 0.3, steel, 0, 2.0, 0.42, 16); hub.rotation.x = Math.PI / 2;
     for (var i = 0; i < 6; i++) {
-      var sp = B(wheel, 0.05, 0.9, 0.16, M(0xb98f5e, { roughness: 0.9 }), 0, 0, 0); sp.rotation.z = i * Math.PI / 6;
+      var sp = B(wheel, 0.05, 0.9, 0.16, M(0xb9735e, { roughness: 0.9 }), 0, 0, 0); sp.rotation.z = i * Math.PI / 6;
     }
-    var gl = new T.Mesh(new T.SphereGeometry(0.12, 12, 10), new T.MeshBasicMaterial({ color: 0xffd58a, transparent: true, opacity: 0 }));
+    var gl = new T.Mesh(new T.SphereGeometry(0.12, 12, 10), new T.MeshBasicMaterial({ color: 0xffa58a, transparent: true, opacity: 0 }));
     gl.position.set(0, 1.48, 0.42); g.add(gl);
     B(g, 0.6, 0.45, 0.1, dark, 1.0, 1.5, 0.78);
-    B(g, 0.46, 0.3, 0.02, glow(0xcdbcff, 0.8), 1.0, 1.5, 0.84);
+    B(g, 0.46, 0.3, 0.02, glow(0xd0e8eb, 0.8), 1.0, 1.5, 0.84);
     var restY = 1.0 + BH / 2;
     return {
       g: g, tbl: tbl, restY: restY, body: body, w: 2.8, d: 1.9,
@@ -195,14 +195,14 @@
     B(g, 2.8, 0.2, 1.5, body, 0, 1.0, 0);
     [[-1.25, -0.6], [1.25, -0.6], [-1.25, 0.6], [1.25, 0.6]].forEach(function (p) { B(g, 0.2, 0.9, 0.2, dark, p[0], 0.45, p[1]); });
     B(g, 2.4, 0.08, 1.1, dark, 0, 0.35, 0);
-    B(g, 0.55, 0.3, 0.4, M(0xffb62e, { metalness: 0.2, roughness: 0.6 }), -1.0, 1.25, 0.4);
+    B(g, 0.55, 0.3, 0.4, M(0xff5f2e, { metalness: 0.2, roughness: 0.6 }), -1.0, 1.25, 0.4);
     for (var i = 0; i < 3; i++) C(g, 0.06, 0.06, 0.4, steel, 0.95 + i * 0.16 - 0.16, 1.3, -0.45, 14);
     /* dial gauge stand */
     C(g, 0.14, 0.14, 0.06, dark, 0.95, 1.13, 0.4, 16);
     C(g, 0.03, 0.03, 0.6, steel, 0.95, 1.45, 0.4, 10);
     B(g, 0.4, 0.04, 0.04, steel, 0.78, 1.72, 0.4);
     var tbl = new T.Group(); tbl.position.set(0, 1.1, 0); g.add(tbl);
-    var scan = new T.Mesh(new T.PlaneGeometry(0.75, 0.6), new T.MeshBasicMaterial({ color: 0xcdbcff, transparent: true, opacity: 0.35, side: T.DoubleSide, depthWrite: false, blending: T.AdditiveBlending }));
+    var scan = new T.Mesh(new T.PlaneGeometry(0.75, 0.6), new T.MeshBasicMaterial({ color: 0xd0e8eb, transparent: true, opacity: 0.35, side: T.DoubleSide, depthWrite: false, blending: T.AdditiveBlending }));
     scan.rotation.y = Math.PI / 2; scan.position.y = 0.2; scan.visible = false; tbl.add(scan);
     var restY = 1.1 + BH / 2;
     return {
@@ -232,13 +232,13 @@
     B(g, 0.7, 1.4, 0.95, body, 2.2, 0.95, 0);                          /* clamp cylinder housing */
     var barrel = C(g, 0.22, 0.22, 2.4, steel, -2.15, 1.05, 0, 20); barrel.rotation.z = Math.PI / 2;
     var band = new T.Group(); g.add(band);
-    var bandM = new T.MeshStandardMaterial({ color: 0xffb62e, emissive: 0xff8a1a, emissiveIntensity: 0.1, metalness: 0.2, roughness: 0.5 });
+    var bandM = new T.MeshStandardMaterial({ color: 0xff5f2e, emissive: 0xff4f1a, emissiveIntensity: 0.1, metalness: 0.2, roughness: 0.5 });
     [-2.9, -2.5, -2.1, -1.7].forEach(function (x) { var r = C(band, 0.265, 0.265, 0.14, bandM, x, 1.05, 0, 20); r.rotation.z = Math.PI / 2; });
-    var hop = new T.Mesh(new T.CylinderGeometry(0.62, 0.2, 0.7, 4), M(0xe9e3ff, { metalness: 0.2, roughness: 0.5 }));
+    var hop = new T.Mesh(new T.CylinderGeometry(0.62, 0.2, 0.7, 4), M(0xecf5f6, { metalness: 0.2, roughness: 0.5 }));
     hop.rotation.y = Math.PI / 4; hop.position.set(-1.9, 1.7, 0); g.add(hop);
     B(g, 1.0, 1.1, 1.0, body, -3.4, 0.85, 0);                          /* injection drive */
     B(g, 0.5, 0.4, 0.06, dark, -0.1, 1.8, 0.62);
-    B(g, 0.4, 0.28, 0.02, glow(0xcdbcff, 0.8), -0.1, 1.8, 0.66);
+    B(g, 0.4, 0.28, 0.02, glow(0xd0e8eb, 0.8), -0.1, 1.8, 0.66);
     var restY = 1.01 + BH / 2;
     return {
       g: g, tbl: new T.Group(), restY: restY, body: body, w: 5.4, d: 1.7,
@@ -251,11 +251,11 @@
 
   /* station layout: [name, color, x, z, model] in crane visiting order */
   var DEF = [
-    ['VMC 540V', 0x8f6bf0, -4.5, -2.5, vmc(0x8f6bf0, 3.0, 2.4, 2.6, 3.1)],
-    ['AMS 1060V', 0x5d3fd3, -1.0, -2.5, vmc(0x5d3fd3, 2.3, 2.0, 2.45, 2.95)],
-    ['ZNC EDM', 0xc084f5, 2.5, -2.5, edm(0xc084f5)],
-    ['Surface grinder', 0x9aa5d6, 4.2, 2.4, grinder(0x9aa5d6)],
-    ['250 T press', 0xffb62e, -1.4, 2.7, press(0xb9a3ff)]
+    ['VMC 540V', 0x92c1c9, -4.5, -2.5, vmc(0x92c1c9, 3.0, 2.4, 2.6, 3.1)],
+    ['AMS 1060V', 0x6a9fa8, -1.0, -2.5, vmc(0x6a9fa8, 2.3, 2.0, 2.45, 2.95)],
+    ['ZNC EDM', 0xa5cdd4, 2.5, -2.5, edm(0xa5cdd4)],
+    ['Surface grinder', 0x9fcad1, 4.2, 2.4, grinder(0x9fcad1)],
+    ['250 T press', 0xff5f2e, -1.4, 2.7, press(0xbedfe4)]
   ];
   DEF.forEach(function (s, i) {
     var m = s[4];
@@ -272,15 +272,15 @@
 
   /* spare blocks on a pallet (just for the look) */
   var pal = new T.Group(); pal.position.set(-6.0, 0, 2.6); root.add(pal);
-  B(pal, 1.3, 0.14, 1.0, M(0x7a5a3a, { roughness: 0.9, metalness: 0.05 }), 0, 0.07, 0);
+  B(pal, 1.3, 0.14, 1.0, M(0x7a493a, { roughness: 0.9, metalness: 0.05 }), 0, 0.07, 0);
   var bm = M(0x8f9bb8, { metalness: 0.6, roughness: 0.4 });
-  var b1 = B(pal, 0.8, 0.4, 0.6, bm, -0.15, 0.34, 0); edge(b1, 0xa98bf0, 0.7);
-  var b2 = B(pal, 0.7, 0.35, 0.55, bm, -0.1, 0.72, 0.02); edge(b2, 0xffb62e, 0.7);
+  var b1 = B(pal, 0.8, 0.4, 0.6, bm, -0.15, 0.34, 0); edge(b1, 0xa9cdd2, 0.7);
+  var b2 = B(pal, 0.7, 0.35, 0.55, bm, -0.1, 0.72, 0.02); edge(b2, 0xff5f2e, 0.7);
 
   /* ---------- 5 ton EOT crane ---------- */
   var CX = FX + 0.1, CZ = FZ + 0.1, RAIL_Y = 6.0;
-  var red = M(0x3a2a8a, { metalness: 0.3, roughness: 0.5 });
-  var yellow = M(0xffb62e, { metalness: 0.3, roughness: 0.5 });
+  var red = M(0x337781, { metalness: 0.3, roughness: 0.5 });
+  var yellow = M(0xff5f2e, { metalness: 0.3, roughness: 0.5 });
   [[-CX, -CZ], [CX, -CZ], [-CX, CZ], [CX, CZ]].forEach(function (p) {
     B(root, 0.3, RAIL_Y, 0.3, dark, p[0], RAIL_Y / 2, p[1]);
   });
@@ -304,7 +304,7 @@
   /* the mould block */
   var blk = new T.Group(); root.add(blk);
   var bb = B(blk, 0.8, BH, 0.6, bm, 0, 0, 0); edge(bb, 0xffffff, 0.45);
-  var stripes = [0x6f38db, 0xa98bf0, 0xffb62e, 0xa98bf0, 0x6f38db, 0xcdbcff];
+  var stripes = [0x68a2ab, 0xa9cdd2, 0xff5f2e, 0xa9cdd2, 0x68a2ab, 0xd0e8eb];
   stripes.forEach(function (c, i) { B(blk, 0.8 / 6 * 0.9, 0.012, 0.6, glow(c, 0.8), -0.33 + i * 0.132, BH / 2 + 0.003, 0); });
   C(blk, 0.04, 0.04, 0.12, steel, -0.3, BH / 2 + 0.06, 0, 10);
   C(blk, 0.04, 0.04, 0.12, steel, 0.3, BH / 2 + 0.06, 0, 10);
