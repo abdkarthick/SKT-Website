@@ -106,7 +106,7 @@ header.hide{transform:translateY(-140%)}
 .hd{width:min(1180px,100%);display:flex;align-items:center;gap:18px;padding:9px 10px 9px 12px;background:#ffffffd9;-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);border-radius:999px;box-shadow:0 14px 44px -16px #24748044,0 0 0 1px #14282b12;transition:background .4s,box-shadow .4s}
 header.solid .hd{background:#fffffff2}
 .logo{display:flex;align-items:center;gap:12px;flex:none}
-.logo img{height:40px;width:auto;aspect-ratio:1457/773}
+.logo img{height:40px;width:auto;aspect-ratio:858/529}
 .logo div{line-height:1.15}
 .logo b{display:block;font:700 15.5px var(--hf);letter-spacing:0}
 .logo small{display:block;margin-top:3px;font:500 10px var(--mf);letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
