@@ -5,7 +5,7 @@
    Pointer tilts the scene. Works on the host #hx3 (home) or #ab3 (about). */
 (function () {
   'use strict';
-  var host = document.getElementById('hx3') || document.getElementById('ab3');
+  var host = document.getElementById('hx3');
   if (!host) return;
   if (!window.THREE) { host.classList.add('nogl'); return; }
   var T = THREE, renderer;
